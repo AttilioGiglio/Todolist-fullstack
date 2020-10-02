@@ -34,12 +34,14 @@
                         </form>
                     </div>
                     <div class="card-body">
-                        <ul>
+                        <ul class="list-group">
                             <!-- syntaxis especial de flask on html-->
                             <!-- Looping each column on table-->
                             {% for task in list_tasks %}
-                            <li>
+                            <li class="list-group-item">
                                 {{task.content}}
+                                <a href="" class="btn btn-success btn-sm">Done</a>
+                                <a href="" class="btn btn-danger btn-sm">Delete</a>
                             </li>
                             <!--Endline of loop until the last colum -->
                             {% endfor %}

@@ -48,7 +48,7 @@ def create():
     # Save the change
     db.session.commit()
     # Return redirection to url home
-    return 'redirect(url_for('home'))'
+    return redirect(url_for('home'))
 
 # Define the module name as the root module app
 if __name__ == "__main__":
