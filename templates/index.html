@@ -39,9 +39,9 @@
                             <!-- Looping each column on table-->
                             {% for task in list_tasks %}
                             <li class="list-group-item">
-                                {{task.content}}
-                                <a href="" class="btn btn-success btn-sm">Done</a>
-                                <a href="" class="btn btn-danger btn-sm">Delete</a>
+                               <span class="{% if task.done %}done{% endif %}">{{task.content}}</span>
+                                <a href="done/{{task.id}}" class="btn btn-success btn-sm">Done</a>
+                                <a href="delete/{{task.id}}" class="btn btn-danger btn-sm">Delete</a>
                             </li>
                             <!--Endline of loop until the last colum -->
                             {% endfor %}

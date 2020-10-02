@@ -33,24 +33,40 @@ class Task(db.Model):
 # Define the home URL
 @app.route('/')
 def home():
-# Asking for all data on table 
+    # Asking for all data on table
     tasks = Task.query.all()
-# Confid to connect with front 
-    return render_template('index.html', list_tasks = tasks)
+# Confid to connect with front
+    return render_template('index.html', list_tasks=tasks)
 
 # Define a new url that It has method to create data
 @app.route('/create-task', methods=['POST'])
 def create():
     # Give value to each column (key). So you each time input is submit, it will create a new column with content as the input written and done as false / task is a instance from object Task
-    task = Task(content=request.form['content'], done=False)
+    new_task = Task(content=request.form['content'], done=False)
     # Add the value save on the task variable to db Task
-    db.session.add(task)
+    db.session.add(new_task)
     # Save the change
     db.session.commit()
     # Return redirection to url home
     return redirect(url_for('home'))
 
+@app.route('/done/<id>')
+def done(id):
+# Query to table Task and filter by id (automatic data created). At first match parameter from url with id from table. It save save the change on a variable.
+    confirm_task =Task.query.filter_by(id=int(id)).first()
+    confirm_task.done = not(confirm_task.done)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+# Define a new url that It has method to delete data, with an id parameter on url and function as a identifier
+@app.route('/delete/<id>')
+def delete(id):
+# Query to table Task and filter by id (automatic data created). At first match parameter from url with id from table. It save the change on a variable. And then delete it from DB.
+    delete_task = Task.query.filter_by(id=int(id)).delete()
+    db.session.commit()
+    return redirect(url_for('home'))
+
 # Define the module name as the root module app
 if __name__ == "__main__":
-# Run the app with flask on your pc, port 5000 and also It will give you debugging advice on terminal. 
+    # Run the app with flask on your pc, port 5000 and also It will give you debugging advice on terminal.
     app.run(host='127.0.0.1', port=5000, debug=True)

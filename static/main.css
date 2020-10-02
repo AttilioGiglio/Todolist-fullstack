@@ -11,3 +11,8 @@ body {
 h1 {
     font-family: 'Lobster', cursive;
 }
+
+.done {
+    text-decoration: line-through;
+    color: grey
+}
