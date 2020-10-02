@@ -34,7 +34,16 @@
                         </form>
                     </div>
                     <div class="card-body">
-
+                        <ul>
+                            <!-- syntaxis especial de flask on html-->
+                            <!-- Looping each column on table-->
+                            {% for task in list_tasks %}
+                            <li>
+                                {{task.content}}
+                            </li>
+                            <!--Endline of loop until the last colum -->
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
             </div>

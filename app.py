@@ -12,7 +12,7 @@
 
 """
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 # Give the name from the app root to flask, a passed it as variable value.
@@ -33,8 +33,10 @@ class Task(db.Model):
 # Define the home URL
 @app.route('/')
 def home():
+# Asking for all data on table 
+    tasks = Task.query.all()
 # Confid to connect with front 
-    return render_template('index.html')
+    return render_template('index.html', list_tasks = tasks)
 
 # Define a new url that It has method to create data
 @app.route('/create-task', methods=['POST'])
@@ -45,27 +47,10 @@ def create():
     db.session.add(task)
     # Save the change
     db.session.commit()
-    # Return an output to the terminal
-    return 'saved'
+    # Return redirection to url home
+    return 'redirect(url_for('home'))'
 
 # Define the module name as the root module app
 if __name__ == "__main__":
 # Run the app with flask on your pc, port 5000 and also It will give you debugging advice on terminal. 
     app.run(host='127.0.0.1', port=5000, debug=True)
-
-# @app.route('/users', methods=['POST'])
-# def create_user():
-#     print(request.json)
-#     return 'success'
-
-# @app.route('/users', methods=['GET'])
-# def get_user():
-#     return 'success'
-
-# @app.route('/users/<id>', methods=['DELETE'])
-# def delete_user():
-#     return 'success'
-
-# @app.route('/users/<id>', methods=['PUT'])
-# def update_user():
-#     return 'success'
