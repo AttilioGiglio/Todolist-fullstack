@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>task</title>
-    <!--MAIN CSS-->
+    <!--MAIN CSS
+    To connect HTML with CSS on Flask
+    -->
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <!--BOOTSTRAP4-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css">
@@ -20,9 +22,11 @@
             <div class="col-md-4 offset-md-4 my-auto">
                 <div class="card">
                     <div class="card-header">
-                        <form action=''>
+                        <!-- To connect frontend with backend new routes besides from home "/" -->
+                        <form action='/create-task' method="POST">
                             <div class="form-group">
-                                <input type='text' placeholder='task' class="form-control" autofocus />
+                                <!-- name='content' is the id to specify to frontend -->
+                                <input type='text' name='content' placeholder='task' class="form-control" autofocus />
                             </div>
                             <button type='submit' class="btn btn-primary btn-block">
                                 Save
